@@ -39,7 +39,8 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 		security.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.GET, "/api/mock/**")
-						.permitAll().requestMatchers("/swagger-ui/**", "/v3/api/**", "/swagger-ui.html").permitAll())
+						.permitAll().requestMatchers("/swagger-ui/**", "/v3/api/**", "/swagger-ui.html").permitAll()
+						.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults());
 		return security.build();
 	}
